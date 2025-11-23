@@ -3,32 +3,35 @@ import Layout from "../layouts/Layout.astro";
 import Intro from "../components/Intro.astro";
 import Projects from "../components/Projects.astro";
 import WaveDivider from "../components/WaveDivider.astro";
-import Webring from "../components/Webring.astro";
-import SpotifyNowPlaying from "../components/SpotifyNowPlaying.astro";
+import Posts from "../components/Posts.astro";
 import Socials from "../components/Socials.astro";
 
-// TODO: Fill in your preferences.
 const variables = {
-  name: "an Astro Theme Demo",
+  name: "Arthur Delbeke",
   subtitles:
-    "And I use Catppuccin colors because this soothing pastel theme looks awesome 💚",
+    "Software Engineer since 2020, based in Paris. Former professional athlete with national titles, still addicted to sports. Dad of two cats.",
 };
 ---
 
 <Layout title={variables.name}>
   <main>
-    <Intro name={variables.name} subtitle={variables.subtitles} />
+    <div class="animate-on-scroll">
+      <Intro name={variables.name} subtitle={variables.subtitles} />
+    </div>
     <WaveDivider color="rosewater" speed={100} size={0.8} direction="left" />
 
-    <Projects />
+    <div class="animate-on-scroll">
+      <Projects />
+    </div>
     <WaveDivider color="flamingo" speed={100} size={0.8} direction="right" />
 
-    <SpotifyNowPlaying />
-    <WaveDivider color="mauve" speed={100} size={0.8} direction="left" />
-
-    <Webring />
+    <div class="animate-on-scroll">
+      <Posts />
+    </div>
     <WaveDivider color="pink" speed={100} size={0.8} direction="right" />
 
-    <Socials />
+    <div class="animate-on-scroll">
+      <Socials />
+    </div>
   </main>
 </Layout>

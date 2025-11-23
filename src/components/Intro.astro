@@ -1,6 +1,4 @@
 ---
-import profilePicture from "../assets/profile-picture.png";
-
 interface Props {
   name: string;
   subtitle: string;
@@ -11,7 +9,7 @@ const { name, subtitle } = Astro.props;
 
 <section class="intro">
   <div class="content">
-    <img src={profilePicture.src} alt="trueberryless" class="pfp" />
+    <img src="/profile.jpg" alt={name} class="pfp" />
     <div class="text">
       <h1>Yo, I'm {name}!</h1>
       <p class="subtitle">{subtitle}</p>
@@ -40,13 +38,19 @@ const { name, subtitle } = Astro.props;
     border-radius: 50%;
     border: 3px solid var(--ctp-lavender);
     transition:
-      transform 0.3s ease,
-      border-color 0.3s ease;
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
 
   .pfp:hover {
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(5deg);
     border-color: var(--ctp-pink);
+    box-shadow:
+      0 20px 25px -5px rgba(245, 194, 231, 0.3),
+      0 10px 10px -5px rgba(245, 194, 231, 0.2);
   }
 
   .text {
@@ -56,8 +60,30 @@ const { name, subtitle } = Astro.props;
   h1 {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--ctp-text);
+    background: linear-gradient(
+      120deg,
+      var(--ctp-text),
+      var(--ctp-lavender),
+      var(--ctp-pink),
+      var(--ctp-mauve)
+    );
+    background-size: 200% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   .subtitle {

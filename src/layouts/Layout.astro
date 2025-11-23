@@ -1,4 +1,6 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+
 interface Props {
   title: string;
 }
@@ -11,13 +13,52 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="darkreader-lock" />
-    <title>{title}</title>
+
+    <!-- SEO -->
+    <title>{title} - Software Engineer</title>
+    <meta name="description" content="Software Engineer since 2020, based in Paris. Former professional athlete with national titles. Building open source projects and mobile apps." />
+    <meta name="author" content={title} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} - Software Engineer`} />
+    <meta property="og:description" content="Software Engineer since 2020, based in Paris. Former professional athlete with national titles. Building open source projects and mobile apps." />
+    <meta property="og:image" content="/profile.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} - Software Engineer`} />
+    <meta name="twitter:description" content="Software Engineer since 2020, based in Paris. Former professional athlete with national titles. Building open source projects and mobile apps." />
+    <meta name="twitter:image" content="/profile.jpg" />
+
+    <ViewTransitions />
   </head>
   <body>
     <slot />
+    <script>
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener("astro:page-load", () => {
+        document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+          observer.observe(el);
+        });
+      });
+    </script>
   </body>
 </html>
 
@@ -67,5 +108,33 @@ const { title } = Astro.props;
       -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
       Cantarell, sans-serif;
     line-height: 1.6;
+  }
+
+  /* Scroll animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-on-scroll.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered animation delays */
+  .animate-on-scroll:nth-child(1) {
+    transition-delay: 0.1s;
+  }
+  .animate-on-scroll:nth-child(2) {
+    transition-delay: 0.2s;
+  }
+  .animate-on-scroll:nth-child(3) {
+    transition-delay: 0.3s;
+  }
+  .animate-on-scroll:nth-child(4) {
+    transition-delay: 0.4s;
   }
 </style>
