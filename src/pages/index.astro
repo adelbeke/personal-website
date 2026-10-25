@@ -1,37 +1,49 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Intro from "../components/Intro.astro";
-import Projects from "../components/Projects.astro";
-import WaveDivider from "../components/WaveDivider.astro";
-import Posts from "../components/Posts.astro";
-import Socials from "../components/Socials.astro";
 
-const variables = {
-  name: "Arthur Delbeke",
-  subtitles:
-    "Software Engineer since 2020, based in Paris. Former professional athlete with national titles, still addicted to sports. Dad of two cats.",
-};
+const name = "Arthur Delbeke";
+
+const projects = [
+  { name: "git-clean-branches", description: "Interactive git branch deletion, ZSH plugin", url: "https://github.com/adelbeke/git-clean-branches" },
+  { name: "git-switch-branch", description: "Interactive git branch switching, ZSH plugin", url: "https://github.com/adelbeke/git-switch-branch" },
+  { name: "React Native Speech to Text", description: "Speech recognition package for React Native", url: "https://github.com/adelbeke/react-native-speech-to-text" },
+  { name: "Convert Loved Songs", description: "Turn your Spotify liked songs into a playlist", url: "https://www.convertlovedsongs.com/" },
+  { name: "Teddy Scores", description: "Board game score tracker (iOS & Android)", url: "https://apps.apple.com/us/app/teddy-scores/id6742528604" },
+  { name: "Reping", description: "Smart reminders (iOS & Android)", url: "https://apps.apple.com/fr/app/reping/id6755497175" },
+  { name: "Upgoal", description: "Set goals and track progress (iOS)", url: "https://apps.apple.com/fr/app/upgoal/id6765514755" },
+  { name: "Donna", description: "macOS GitHub companion for PRs, branches and worktrees", url: "https://github.com/adelbeke/donna" },
+  { name: "Memcook", description: "Fully local recipe book (iOS & Web)", url: "https://memcook.com/" },
+];
+
+const links = [
+  { name: "GitHub", url: "https://github.com/adelbeke" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/arthurdelbeke/" },
+  { name: "Bluesky", url: "https://bsky.app/profile/dbkable.bsky.social" },
+];
 ---
 
-<Layout title={variables.name}>
-  <main>
-    <div class="animate-on-scroll">
-      <Intro name={variables.name} subtitle={variables.subtitles} />
-    </div>
-    <WaveDivider color="rosewater" speed={100} size={0.8} direction="left" />
+<Layout title={name}>
+  <header>
+    <img src="/profile.jpg" alt="" width="64" height="64" />
+    <h1>{name}</h1>
+  </header>
+  <p>Software Engineer at <a href="https://www.doctolib.fr/">Doctolib</a>.</p>
+  <p class="muted">
+    Coding since 2020, based in Paris. Former professional athlete with national titles, still
+    addicted to sports. Dad of two cats.
+  </p>
 
-    <div class="animate-on-scroll">
-      <Projects />
-    </div>
-    <WaveDivider color="flamingo" speed={100} size={0.8} direction="right" />
+  <h2>Projects</h2>
+  {
+    projects.map((project) => (
+      <p>
+        <a href={project.url}>{project.name}</a> <span class="muted">· {project.description}</span>
+      </p>
+    ))
+  }
 
-    <div class="animate-on-scroll">
-      <Posts />
-    </div>
-    <WaveDivider color="pink" speed={100} size={0.8} direction="right" />
-
-    <div class="animate-on-scroll">
-      <Socials />
-    </div>
-  </main>
+  <h2>Elsewhere</h2>
+  <p>
+    {links.map((link, index) => (<>{index > 0 && " · "}<a href={link.url}>{link.name}</a></>))}
+  </p>
 </Layout>
