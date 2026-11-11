@@ -4,15 +4,15 @@ import Layout from "../layouts/Layout.astro";
 const name = "Arthur Delbeke";
 
 const projects = [
-  { name: "git-clean-branches", description: "Interactive git branch deletion, ZSH plugin", url: "https://github.com/adelbeke/git-clean-branches" },
-  { name: "git-switch-branch", description: "Interactive git branch switching, ZSH plugin", url: "https://github.com/adelbeke/git-switch-branch" },
+  { name: "git-clean-branches", description: "Interactive git branch deletion, ZSH plugin", url: "https://github.com/adelbeke/git-clean-branches", unmaintained: true },
+  { name: "git-switch-branch", description: "Interactive git branch switching, ZSH plugin", url: "https://github.com/adelbeke/git-switch-branch", unmaintained: true },
   { name: "React Native Speech to Text", description: "Speech recognition package for React Native", url: "https://github.com/adelbeke/react-native-speech-to-text" },
-  { name: "Convert Loved Songs", description: "Turn your Spotify liked songs into a playlist", url: "https://www.convertlovedsongs.com/" },
+  { name: "Convert Loved Songs", description: "Turn your Spotify liked songs into a playlist", url: "https://www.convertlovedsongs.com/", unmaintained: true },
   { name: "Teddy Scores", description: "Board game score tracker (iOS & Android)", url: "https://apps.apple.com/us/app/teddy-scores/id6742528604" },
   { name: "Reping", description: "Smart reminders (iOS & Android)", url: "https://apps.apple.com/fr/app/reping/id6755497175" },
   { name: "Upgoal", description: "Set goals and track progress (iOS)", url: "https://apps.apple.com/fr/app/upgoal/id6765514755" },
   { name: "Donna", description: "macOS GitHub companion for PRs, branches and worktrees", url: "https://github.com/adelbeke/donna" },
-  { name: "Memcook", description: "Fully local recipe book (iOS & Web)", url: "https://memcook.com/" },
+  { name: "Memcook", description: "Fully local recipe book (iOS & Web)", url: "https://memcook.com/", appStoreUrl: "https://apps.apple.com/fr/app/memcook/id6824308178" },
 ];
 
 const links = [
@@ -37,7 +37,7 @@ const links = [
   {
     projects.map((project) => (
       <p>
-        <a href={project.url}>{project.name}</a> <span class="muted">· {project.description}</span>
+        <a href={project.url}>{project.name}</a>{project.appStoreUrl && (<> (<a href={project.appStoreUrl}>App Store</a>)</>)} <span class="muted">· {project.description}{project.unmaintained && " (not maintained)"}</span>
       </p>
     ))
   }
