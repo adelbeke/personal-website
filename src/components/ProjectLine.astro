@@ -1,0 +1,7 @@
+---
+const { project } = Astro.props;
+---
+
+<p>
+  <a href={project.url}>{project.name}</a>{project.appStoreUrl && (<> (<a href={project.appStoreUrl}>App Store</a>)</>)} <span class="muted">· {project.description}</span>
+</p>

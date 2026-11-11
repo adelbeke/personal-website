@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ProjectLine from "../components/ProjectLine.astro";
 
 const name = "Arthur Delbeke";
 
@@ -8,10 +9,10 @@ const projects = [
   { name: "git-switch-branch", description: "Interactive git branch switching, ZSH plugin", url: "https://github.com/adelbeke/git-switch-branch", unmaintained: true },
   { name: "React Native Speech to Text", description: "Speech recognition package for React Native", url: "https://github.com/adelbeke/react-native-speech-to-text" },
   { name: "Convert Loved Songs", description: "Turn your Spotify liked songs into a playlist", url: "https://www.convertlovedsongs.com/", unmaintained: true },
-  { name: "Teddy Scores", description: "Board game score tracker (iOS & Android)", url: "https://apps.apple.com/us/app/teddy-scores/id6742528604" },
+  { name: "Teddy Scores", description: "Board game score tracker (iOS & Android)", url: "https://apps.apple.com/us/app/teddy-scores/id6742528604", unmaintained: true },
   { name: "Reping", description: "Smart reminders (iOS & Android)", url: "https://apps.apple.com/fr/app/reping/id6755497175" },
-  { name: "Upgoal", description: "Set goals and track progress (iOS)", url: "https://apps.apple.com/fr/app/upgoal/id6765514755" },
-  { name: "Donna", description: "macOS GitHub companion for PRs, branches and worktrees", url: "https://github.com/adelbeke/donna" },
+  { name: "Upgoal", description: "Set goals and track progress (iOS)", url: "https://apps.apple.com/fr/app/upgoal/id6765514755", unmaintained: true },
+  { name: "Donna", description: "macOS GitHub companion for PRs, branches and worktrees", url: "https://github.com/adelbeke/donna", unmaintained: true },
   { name: "Memcook", description: "Fully local recipe book (iOS & Web)", url: "https://memcook.com/", appStoreUrl: "https://apps.apple.com/fr/app/memcook/id6824308178" },
 ];
 
@@ -33,14 +34,15 @@ const links = [
     addicted to sports. Dad of two cats.
   </p>
 
-  <h2>Projects</h2>
-  {
-    projects.map((project) => (
-      <p>
-        <a href={project.url}>{project.name}</a>{project.appStoreUrl && (<> (<a href={project.appStoreUrl}>App Store</a>)</>)} <span class="muted">· {project.description}{project.unmaintained && " (not maintained)"}</span>
-      </p>
-    ))
-  }
+  <h2>Maintained</h2>
+  {projects.filter((project) => !project.unmaintained).map((project) => <ProjectLine project={project} />)}
+
+  <h2>Not maintained</h2>
+  <p class="muted">
+    These still work as they are. They do their job and have a small audience, so they don't get
+    new features.
+  </p>
+  {projects.filter((project) => project.unmaintained).map((project) => <ProjectLine project={project} />)}
 
   <h2>Elsewhere</h2>
   <p>
